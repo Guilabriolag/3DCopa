@@ -1,0 +1,131 @@
+@import "tailwindcss";
+
+@theme {
+  --font-display: "Barlow Condensed", "Oswald", "Arial Narrow", sans-serif;
+  --font-body: "Barlow", "Inter", system-ui, -apple-system, sans-serif;
+
+  --color-ink: #04060c;
+  --color-ink2: #090e1a;
+  --color-ink3: #101a2c;
+  --color-line: #1f2f4b;
+  --color-gold: #f7d417;
+  --color-pitch: #3ddc84;
+  --color-hot: #ff5a4d;
+  --color-ice: #7cc7ff;
+  --color-chalk: #eef2f7;
+  --color-dust: #93a2bd;
+}
+
+html,
+body {
+  background: #04060c;
+  color: #eef2f7;
+  font-family: var(--font-body);
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  background-image:
+    radial-gradient(1100px 520px at 12% -10%, rgba(61, 220, 132, 0.16), transparent 60%),
+    radial-gradient(900px 500px at 95% 0%, rgba(247, 212, 23, 0.12), transparent 55%),
+    radial-gradient(800px 600px at 50% 120%, rgba(124, 199, 255, 0.1), transparent 60%),
+    repeating-linear-gradient(115deg, rgba(255, 255, 255, 0.022) 0 2px, transparent 2px 9px);
+  min-height: 100vh;
+}
+
+@layer utilities {
+  .clip-tag {
+    clip-path: polygon(0 0, 100% 0, 100% 68%, calc(100% - 14px) 100%, 0 100%);
+  }
+  .clip-card {
+    clip-path: polygon(18px 0, 100% 0, 100% calc(100% - 18px), calc(100% - 18px) 100%, 0 100%, 0 18px);
+  }
+  .clip-btn {
+    clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
+  }
+  .text-stroke {
+    -webkit-text-stroke: 1px rgba(4, 6, 12, 0.55);
+  }
+  .grid-pitch {
+    background-image:
+      linear-gradient(rgba(61, 220, 132, 0.07) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(61, 220, 132, 0.07) 1px, transparent 1px);
+    background-size: 34px 34px;
+  }
+  .scroll-x {
+    scrollbar-width: thin;
+    scrollbar-color: #24344f transparent;
+  }
+}
+
+.panel {
+  background:
+    linear-gradient(180deg, rgba(18, 28, 48, 0.92), rgba(6, 10, 18, 0.94));
+  border: 1px solid rgba(31, 47, 75, 0.9);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05), 0 18px 40px -24px rgba(0, 0, 0, 0.9);
+}
+
+.hud-chip {
+  background: linear-gradient(180deg, rgba(10, 16, 28, 0.92), rgba(4, 7, 13, 0.92));
+  border: 1px solid rgba(124, 199, 255, 0.18);
+}
+
+input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 6px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #24344f, #1b2740);
+  outline: none;
+}
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 4px;
+  background: linear-gradient(180deg, #ffe873, #f7d417);
+  border: 1px solid #7a6200;
+  box-shadow: 0 3px 10px rgba(247, 212, 23, 0.35);
+  cursor: pointer;
+}
+input[type="range"]::-moz-range-thumb {
+  width: 18px;
+  height: 18px;
+  border-radius: 4px;
+  background: #f7d417;
+  border: 1px solid #7a6200;
+  cursor: pointer;
+}
+
+@keyframes tickerIn {
+  from { opacity: 0; transform: translateX(-14px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+.ticker-item { animation: tickerIn 0.35s ease-out; }
+
+@keyframes goalFlash {
+  0%, 100% { opacity: 0; transform: scale(0.82); }
+  15% { opacity: 1; transform: scale(1.04); }
+  70% { opacity: 1; transform: scale(1); }
+}
+.goal-flash { animation: goalFlash 2.6s ease-out forwards; }
+
+@keyframes pulseRing {
+  0% { box-shadow: 0 0 0 0 rgba(247, 212, 23, 0.5); }
+  100% { box-shadow: 0 0 0 18px rgba(247, 212, 23, 0); }
+}
+.pulse-ring { animation: pulseRing 1.6s infinite; }
+
+@keyframes sweep {
+  0% { transform: translateX(-120%); }
+  100% { transform: translateX(220%); }
+}
+.sweep::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(100deg, transparent 20%, rgba(255, 255, 255, 0.16) 50%, transparent 80%);
+  animation: sweep 3.4s linear infinite;
+  pointer-events: none;
+}
